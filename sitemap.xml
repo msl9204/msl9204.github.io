@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://msl9204.github.io/categories/</loc>
+    <lastmod>2022-06-28T22:55:11+09:00</lastmod>
+  </url><url>
     <loc>https://msl9204.github.io/tags/java/</loc>
     <lastmod>2022-06-28T22:55:11+09:00</lastmod>
   </url><url>
@@ -17,13 +20,14 @@
     <loc>https://msl9204.github.io/</loc>
     <lastmod>2022-06-28T22:55:11+09:00</lastmod>
   </url><url>
+    <loc>https://msl9204.github.io/categories/%EA%B0%9C%EB%B0%9C/</loc>
+    <lastmod>2022-06-28T22:55:11+09:00</lastmod>
+  </url><url>
     <loc>https://msl9204.github.io/posts/my-first-post/</loc>
     <lastmod>2022-06-28T22:55:11+09:00</lastmod>
   </url><url>
     <loc>https://msl9204.github.io/about/</loc>
   </url><url>
     <loc>https://msl9204.github.io/archives/</loc>
-  </url><url>
-    <loc>https://msl9204.github.io/categories/</loc>
   </url>
 </urlset>

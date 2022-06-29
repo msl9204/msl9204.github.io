@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZDG5DD515"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WZDG5DD515');
+    </script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -179,14 +188,48 @@ public class Spring { System.out.println(&#34;Hello World!&#34;) } Title1 Title1
 
 <article class="post-single">
   <header class="post-header">
-    
+    <div class="breadcrumbs"><a href="https://msl9204.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://msl9204.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       테스트 첫글
     </h1>
-    <div class="post-meta"><span title='2022-06-28 22:55:11 +0900 KST'>June 28, 2022</span>
+    <div class="post-meta"><span title='2022-06-28 22:55:11 +0900 KST'>June 28, 2022</span>&nbsp;·&nbsp;1 min
 
 </div>
-  </header> 
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#title1" aria-label="Title1">Title1</a><ul>
+                        
+                <li>
+                    <a href="#title1-1" aria-label="Title1">Title1</a><ul>
+                        
+                <li>
+                    <a href="#title1-2" aria-label="Title1">Title1</a><ul>
+                        
+                <li>
+                    <a href="#title1-3" aria-label="Title1">Title1</a><ul>
+                        
+                <li>
+                    <a href="#title1-4" aria-label="Title1">Title1</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
   <div class="post-content"><h1 id="title1">Title1<a hidden class="anchor" aria-hidden="true" href="#title1">#</a></h1>
 <p><code>this is code</code></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Spring</span> <span style="color:#f92672">{</span>
@@ -282,6 +325,53 @@ public class Spring { System.out.println(&#34;Hello World!&#34;) } Title1 Title1
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 
