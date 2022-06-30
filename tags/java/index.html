@@ -36,35 +36,9 @@
         }
 
     </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript><meta property="og:title" content="java" />
+</noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.1/styles/lioshi.min.css"
+    integrity="sha512-vimj6dRL8POPOUYEJtoaXpkwG6lnqGfwTldbcTfz15o0NpWeXzZS2pq0L/wJ8OBrAFwjqo1TqbwTgbaDdKZYKg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /><meta property="og:title" content="java" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://msl9204.github.io/tags/java/" />
@@ -75,43 +49,13 @@
 
 </head>
 
-<body class="list" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
+<body class="list dark" id="top">
 
 <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://msl9204.github.io/" accesskey="h" title="Tech Log (Alt + H)">Tech Log</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
             </div>
         </div>
         <ul id="menu">
@@ -137,15 +81,14 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>테스트 첫글
+    <h2>프로그래머스 - 멀쩡한 사각형
     </h2>
   </header>
   <div class="entry-content">
-    <p>Title1 this is code
-public class Spring { System.out.println(&#34;Hello World!&#34;) } Title1 Title1 Title1 Title1 가나다 라마바 </p>
+    <p>접근 제한사항에 W, H : 1억 이하의 자연수가 있으므로 완전탐색류는 아니고 직선의 기울기를 이용해서 푸는 문제처럼 보였다. 3개정도 그림을 그려보니 약분된 기울기를 구하면, 분자 * 분모 = 반복되는 블럭의 개수가 나오고 분자 &#43; 분모 - 1을 하면 반복되는 블럭 속에서 하얀색 부분의 개수가 나옴을 알 수 있었다. 코드 import java.io.BufferedReader; import java.io.IOException; import java.io.InputStreamReader; import java.util.StringTokenizer; public class 멀쩡한_사각형 { public static void main(String[] args) throws IOException { BufferedReader br = new BufferedReader(new InputStreamReader(System....</p>
   </div>
-  <footer class="entry-footer"><span title='2022-06-28 22:55:11 +0900 KST'>June 28, 2022</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to 테스트 첫글" href="https://msl9204.github.io/posts/my-first-post/"></a>
+  <footer class="entry-footer"><span title='2022-06-30 21:43:00 +0900 KST'>June 30, 2022</span>&nbsp;·&nbsp;1 min</footer>
+  <a class="entry-link" aria-label="post link to 프로그래머스 - 멀쩡한 사각형" href="https://msl9204.github.io/posts/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A9%80%EC%A9%A1%ED%95%9C-%EC%82%AC%EA%B0%81%ED%98%95/"></a>
 </article>
     </main>
     
@@ -203,18 +146,6 @@ public class Spring { System.out.println(&#34;Hello World!&#34;) } Title1 Title1
             mybutton.style.opacity = "0";
         }
     };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
 
 </script>
 </body>
