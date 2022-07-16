@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZDG5DD515"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WZDG5DD515');
+    </script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>소켓과 파일디스크립터 | Tech Log</title>
+<meta name="keywords" content="OS, Socket, File Descriptor, C, Linux">
+<meta name="description" content="회사에서 C 기반의 TCP Client를 구현해야 할 일이 생겨서 소켓의 동작방식을 자세히 알아보게 되었다. 그런데 socket에 대해 알아보기 전에 먼저 file descriptor에 대해 알아볼 필요가 있다.
+File Descriptor란? 파일 서술자라고 부르며 프로세스가 생성될 때 프로세스 만의 File Descriptor Table이 생성되고, 테이블에는 3개의 기본 표준 입출력 file descriptor (이하 fd)이 생성된다.
+정수값 이름 0 표준 입력 (stdin) 1 표준 출력 (stdout) 2 표준 오류 (stderr) 이 3개의 입출력은 흔히 터미널에서 ps -ef | grep [something] 처럼 사용하는 파이프를 이용한 명령어나 프로세스 실행 시, nohup a.">
+<meta name="author" content="">
+<link rel="canonical" href="https://msl9204.github.io/posts/file-descriptor/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d7fb4cbf980fe688a21621b06a795933c4e6bb2d4070ec940667af1715d84af2.css" integrity="sha256-1/tMv5gP5oiiFiGwanlZM8Tmuy1AcOyUBmevFxXYSvI=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://msl9204.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://msl9204.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://msl9204.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://msl9204.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://msl9204.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.1/styles/lioshi.min.css"
+    integrity="sha512-vimj6dRL8POPOUYEJtoaXpkwG6lnqGfwTldbcTfz15o0NpWeXzZS2pq0L/wJ8OBrAFwjqo1TqbwTgbaDdKZYKg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /><meta property="og:title" content="소켓과 파일디스크립터" />
+<meta property="og:description" content="회사에서 C 기반의 TCP Client를 구현해야 할 일이 생겨서 소켓의 동작방식을 자세히 알아보게 되었다. 그런데 socket에 대해 알아보기 전에 먼저 file descriptor에 대해 알아볼 필요가 있다.
+File Descriptor란? 파일 서술자라고 부르며 프로세스가 생성될 때 프로세스 만의 File Descriptor Table이 생성되고, 테이블에는 3개의 기본 표준 입출력 file descriptor (이하 fd)이 생성된다.
+정수값 이름 0 표준 입력 (stdin) 1 표준 출력 (stdout) 2 표준 오류 (stderr) 이 3개의 입출력은 흔히 터미널에서 ps -ef | grep [something] 처럼 사용하는 파이프를 이용한 명령어나 프로세스 실행 시, nohup a." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msl9204.github.io/posts/file-descriptor/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-16T18:14:48&#43;09:00" />
+<meta property="article:modified_time" content="2022-07-16T18:14:48&#43;09:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="소켓과 파일디스크립터"/>
+<meta name="twitter:description" content="회사에서 C 기반의 TCP Client를 구현해야 할 일이 생겨서 소켓의 동작방식을 자세히 알아보게 되었다. 그런데 socket에 대해 알아보기 전에 먼저 file descriptor에 대해 알아볼 필요가 있다.
+File Descriptor란? 파일 서술자라고 부르며 프로세스가 생성될 때 프로세스 만의 File Descriptor Table이 생성되고, 테이블에는 3개의 기본 표준 입출력 file descriptor (이하 fd)이 생성된다.
+정수값 이름 0 표준 입력 (stdin) 1 표준 출력 (stdout) 2 표준 오류 (stderr) 이 3개의 입출력은 흔히 터미널에서 ps -ef | grep [something] 처럼 사용하는 파이프를 이용한 명령어나 프로세스 실행 시, nohup a."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://msl9204.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "소켓과 파일디스크립터",
+      "item": "https://msl9204.github.io/posts/file-descriptor/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "소켓과 파일디스크립터",
+  "name": "소켓과 파일디스크립터",
+  "description": "회사에서 C 기반의 TCP Client를 구현해야 할 일이 생겨서 소켓의 동작방식을 자세히 알아보게 되었다. 그런데 socket에 대해 알아보기 전에 먼저 file descriptor에 대해 알아볼 필요가 있다.\nFile Descriptor란? 파일 서술자라고 부르며 프로세스가 생성될 때 프로세스 만의 File Descriptor Table이 생성되고, 테이블에는 3개의 기본 표준 입출력 file descriptor (이하 fd)이 생성된다.\n정수값 이름 0 표준 입력 (stdin) 1 표준 출력 (stdout) 2 표준 오류 (stderr) 이 3개의 입출력은 흔히 터미널에서 ps -ef | grep [something] 처럼 사용하는 파이프를 이용한 명령어나 프로세스 실행 시, nohup a.",
+  "keywords": [
+    "OS", "Socket", "File Descriptor", "C", "Linux"
+  ],
+  "articleBody": "회사에서 C 기반의 TCP Client를 구현해야 할 일이 생겨서 소켓의 동작방식을 자세히 알아보게 되었다. 그런데 socket에 대해 알아보기 전에 먼저 file descriptor에 대해 알아볼 필요가 있다.\nFile Descriptor란? 파일 서술자라고 부르며 프로세스가 생성될 때 프로세스 만의 File Descriptor Table이 생성되고, 테이블에는 3개의 기본 표준 입출력 file descriptor (이하 fd)이 생성된다.\n정수값 이름 0 표준 입력 (stdin) 1 표준 출력 (stdout) 2 표준 오류 (stderr) 이 3개의 입출력은 흔히 터미널에서 ps -ef | grep [something] 처럼 사용하는 파이프를 이용한 명령어나 프로세스 실행 시, nohup a.py 1\u003eout.log 2\u003eerror.log 와 같은 명령어에서 무의식적으로 사용하는 것과 동일하다. 사용자 정의 fd는, 파일을 open 하거나, socket을 생성하는 등의 방법으로 생성할 수 있다.\n정수값 이름 0 표준 입력 (stdin) 1 표준 출력 (stdout) 2 표준 오류 (stderr) 3 file open 4 socket 위의 표 처럼 일종의 fd pointer가 생성된다.\n프로세스의 fd도 lsof (list of open file) 명령어로 확인 가능하다 숫자뒤에 붙는 r은 읽기전용, w는 쓰기전용, u는 rw (양방향) 의미이다\nSocket 이란? 소켓은 fd의 하나로 양방향 스트림 연결이 가능하다. 소켓의 흐름은 다음 그림과 같다.\n소켓 LifeCycle 출처 : https://en.wikipedia.org/wiki/Berkeley_sockets\nServer의 경우 socket 생성 TCP로 사용할지, UDP로 사용할지 정한다. 소켓은 ip4를 사용할지,ip6을 사용할지 정한다. 위의 항목을 정하고 서버의 경우에는 소켓을 생성하여 fd를 받는다. socket Bind TCP로 사용할지, UDP로 사용할지 정한다. 어떤 포트를 소켓과 연결할지 정한다. 어떤 ip만 수신할지 정한다. socket Listen bind를 했으면 이제 소켓은 외부의 입력에 반응한다 socket Accept 외부에 입력이 들어오면 새로운 fd를 생성한다. (매 accept 마다 새로운 fd가 생성됨) accept fd 를 이용해서 client와 양방향 통신을 한다. Client의 경우 socket 생성 클라이언트도 소켓을 생성하여 fd를 받는다. socket Connect TCP로 사용할지, UDP로 사용할지 정한다. 어떤 포트를 소켓과 연결할지 정한다. 어떤 ip에 연결할지 정한다. 위의 항목을 정하고 연결한다. 연결이 성공했으면, fd를 이용하여 server와 양방향 통신을 한다. lsof로 소켓 생성을 확인 할 수 있다.\n마치며 운영체제에서 입출력을 다루는 방법에 대한 개념을 명확하게 알면, 다른 언어를 사용할 때에도 같은 개념으로 접근한다면 쉽게 이해할 수 있을 것 같았다.\nJava의 경우에는 InputStream이나 OutputStream이 기본적인 입출력 방법이고, 여러가지 Decorator Pattern이 적용된 Stream들을 필요한 부분에 맞춰서 사용하면 된다.\n소켓도 역시 stream이므로 서로 연결된 이후부터는 파일 stream과 동일하게 생각하니 이해하기 쉬웠다. 이런 부분들 때문에 운영체제 공부의 중요성을 다시 한번 더 느꼈다.\n",
+  "wordCount" : "346",
+  "inLanguage": "en",
+  "datePublished": "2022-07-16T18:14:48+09:00",
+  "dateModified": "2022-07-16T18:14:48+09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://msl9204.github.io/posts/file-descriptor/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tech Log",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://msl9204.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://msl9204.github.io/" accesskey="h" title="Tech Log (Alt + H)">Tech Log</a>
+            <div class="logo-switches">
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://msl9204.github.io/about/" title="about">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://msl9204.github.io/archives/" title="archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://msl9204.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://msl9204.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      소켓과 파일디스크립터
+    </h1>
+    <div class="post-meta"><span title='2022-07-16 18:14:48 +0900 KST'>July 16, 2022</span>&nbsp;·&nbsp;2 min
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">목차</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#file-descriptor%eb%9e%80" aria-label="File Descriptor란?">File Descriptor란?</a></li>
+                <li>
+                    <a href="#socket-%ec%9d%b4%eb%9e%80" aria-label="Socket 이란?">Socket 이란?</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#server%ec%9d%98-%ea%b2%bd%ec%9a%b0" aria-label="Server의 경우">Server의 경우</a></li>
+                <li>
+                    <a href="#client%ec%9d%98-%ea%b2%bd%ec%9a%b0" aria-label="Client의 경우">Client의 경우</a></li></ul>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#%eb%a7%88%ec%b9%98%eb%a9%b0" aria-label="마치며">마치며</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>회사에서 C 기반의 TCP Client를 구현해야 할 일이 생겨서 소켓의 동작방식을 자세히 알아보게 되었다.
+그런데 socket에 대해 알아보기 전에 먼저 file descriptor에 대해 알아볼 필요가 있다.</p>
+<hr>
+<h1 id="file-descriptor란">File Descriptor란?<a hidden class="anchor" aria-hidden="true" href="#file-descriptor란">#</a></h1>
+<p>파일 서술자라고 부르며 프로세스가 생성될 때 프로세스 만의 File Descriptor Table이 생성되고, 테이블에는 3개의 기본 표준 입출력 file descriptor (이하 fd)이 생성된다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">정수값</th>
+<th style="text-align:center">이름</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">표준 입력 (stdin)</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">표준 출력 (stdout)</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">표준 오류 (stderr)</td>
+</tr>
+</tbody>
+</table>
+<p>이 3개의 입출력은 흔히 터미널에서 <code>ps -ef | grep [something]</code> 처럼 사용하는 파이프를 이용한 명령어나 프로세스 실행 시, <code>nohup a.py 1&gt;out.log 2&gt;error.log</code> 와 같은 명령어에서 무의식적으로 사용하는 것과 동일하다.
+<br />
+<br />
+사용자 정의 fd는, 파일을 open 하거나, socket을 생성하는 등의 방법으로 생성할 수 있다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">정수값</th>
+<th style="text-align:center">이름</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">표준 입력 (stdin)</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">표준 출력 (stdout)</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">표준 오류 (stderr)</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">file open</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">socket</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>위의 표 처럼 일종의 fd pointer가 생성된다.</p>
+</blockquote>
+<p><img loading="lazy" src="/img/1/2.png" alt="File Descriptor Table"  />
+</p>
+<blockquote>
+<p>프로세스의 fd도 lsof (list of open file) 명령어로 확인 가능하다 <br />
+숫자뒤에 붙는 r은 읽기전용, w는 쓰기전용, u는 rw (양방향) 의미이다</p>
+</blockquote>
+<hr>
+<h1 id="socket-이란">Socket 이란?<a hidden class="anchor" aria-hidden="true" href="#socket-이란">#</a></h1>
+<p>소켓은 fd의 하나로 양방향 스트림 연결이 가능하다. <br />
+소켓의 흐름은 다음 그림과 같다.</p>
+<p><img loading="lazy" src="/img/1/InternetSocketBasicDiagram_zhtw.png" alt="Berkeley sockets"  />
+</p>
+<blockquote>
+<p>소켓 LifeCycle <br />
+출처 : <a href="https://en.wikipedia.org/wiki/Berkeley_sockets">https://en.wikipedia.org/wiki/Berkeley_sockets</a></p>
+</blockquote>
+<h3 id="server의-경우">Server의 경우<a hidden class="anchor" aria-hidden="true" href="#server의-경우">#</a></h3>
+<ol>
+<li>socket 생성
+<ul>
+<li>TCP로 사용할지, UDP로 사용할지 정한다.</li>
+<li>소켓은 ip4를 사용할지,ip6을 사용할지 정한다.</li>
+<li>위의 항목을 정하고 서버의 경우에는 소켓을 생성하여 fd를 받는다.</li>
+</ul>
+</li>
+<li>socket Bind
+<ul>
+<li>TCP로 사용할지, UDP로 사용할지 정한다.</li>
+<li>어떤 포트를 소켓과 연결할지 정한다.</li>
+<li>어떤 ip만 수신할지 정한다.</li>
+</ul>
+</li>
+<li>socket Listen
+<ul>
+<li>bind를 했으면 이제 소켓은 외부의 입력에 반응한다</li>
+</ul>
+</li>
+<li>socket Accept
+<ul>
+<li>외부에 입력이 들어오면 새로운 fd를 생성한다. (매 accept 마다 새로운 fd가 생성됨)</li>
+<li>accept fd 를 이용해서 client와 양방향 통신을 한다.</li>
+</ul>
+</li>
+</ol>
+<h3 id="client의-경우">Client의 경우<a hidden class="anchor" aria-hidden="true" href="#client의-경우">#</a></h3>
+<ol>
+<li>socket 생성
+<ul>
+<li>클라이언트도 소켓을 생성하여 fd를 받는다.</li>
+</ul>
+</li>
+<li>socket Connect
+<ul>
+<li>TCP로 사용할지, UDP로 사용할지 정한다.</li>
+<li>어떤 포트를 소켓과 연결할지 정한다.</li>
+<li>어떤 ip에 연결할지 정한다.</li>
+<li>위의 항목을 정하고 연결한다.</li>
+<li>연결이 성공했으면, fd를 이용하여 server와 양방향 통신을 한다.</li>
+</ul>
+</li>
+</ol>
+<p><img loading="lazy" src="/img/1/3.png" alt="Sockets fd"  />
+</p>
+<blockquote>
+<p>lsof로 소켓 생성을 확인 할 수 있다.</p>
+</blockquote>
+<hr>
+<h1 id="마치며">마치며<a hidden class="anchor" aria-hidden="true" href="#마치며">#</a></h1>
+<p>운영체제에서 입출력을 다루는 방법에 대한 개념을 명확하게 알면, 다른 언어를 사용할 때에도 같은 개념으로 접근한다면 쉽게 이해할 수 있을 것 같았다.<br />
+Java의 경우에는 InputStream이나 OutputStream이 기본적인 입출력 방법이고, 여러가지 Decorator Pattern이 적용된 Stream들을 필요한 부분에 맞춰서 사용하면 된다.<br />
+소켓도 역시 stream이므로 서로 연결된 이후부터는 파일 stream과 동일하게 생각하니 이해하기 쉬웠다. 이런 부분들 때문에 운영체제 공부의 중요성을 다시 한번 더 느꼈다.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://msl9204.github.io/tags/os/">OS</a></li>
+      <li><a href="https://msl9204.github.io/tags/socket/">Socket</a></li>
+      <li><a href="https://msl9204.github.io/tags/file-descriptor/">File Descriptor</a></li>
+      <li><a href="https://msl9204.github.io/tags/c/">C</a></li>
+      <li><a href="https://msl9204.github.io/tags/linux/">Linux</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://msl9204.github.io/posts/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%8B%A4%EB%A6%AC%EB%A5%BC-%EC%A7%80%EB%82%98%EB%8A%94-%ED%8A%B8%EB%9F%AD/">
+    <span class="title">Next »</span>
+    <br>
+    <span>프로그래머스 - 다리를 지나는 트럭</span>
+  </a>
+</nav>
+
+  </footer>
+
+
+
+<script src="https://utteranc.es/client.js" repo="msl9204/msl9204.github.io" issue-term="pathname" theme="github-dark"
+    crossorigin="anonymous" async>
+    </script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://msl9204.github.io/">Tech Log</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

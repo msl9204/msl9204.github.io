@@ -6,7 +6,18 @@
     <description>Recent content on Tech Log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Jul 2022 23:07:10 +0900</lastBuildDate><atom:link href="https://msl9204.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Jul 2022 18:14:48 +0900</lastBuildDate><atom:link href="https://msl9204.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>소켓과 파일디스크립터</title>
+      <link>https://msl9204.github.io/posts/file-descriptor/</link>
+      <pubDate>Sat, 16 Jul 2022 18:14:48 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/posts/file-descriptor/</guid>
+      <description>회사에서 C 기반의 TCP Client를 구현해야 할 일이 생겨서 소켓의 동작방식을 자세히 알아보게 되었다. 그런데 socket에 대해 알아보기 전에 먼저 file descriptor에 대해 알아볼 필요가 있다.
+File Descriptor란? 파일 서술자라고 부르며 프로세스가 생성될 때 프로세스 만의 File Descriptor Table이 생성되고, 테이블에는 3개의 기본 표준 입출력 file descriptor (이하 fd)이 생성된다.
+정수값 이름 0 표준 입력 (stdin) 1 표준 출력 (stdout) 2 표준 오류 (stderr) 이 3개의 입출력은 흔히 터미널에서 ps -ef | grep [something] 처럼 사용하는 파이프를 이용한 명령어나 프로세스 실행 시, nohup a.</description>
+    </item>
+    
     <item>
       <title>프로그래머스 - 다리를 지나는 트럭</title>
       <link>https://msl9204.github.io/posts/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%8B%A4%EB%A6%AC%EB%A5%BC-%EC%A7%80%EB%82%98%EB%8A%94-%ED%8A%B8%EB%9F%AD/</link>
