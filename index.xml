@@ -6,16 +6,122 @@
     <description>Recent content on Tech Log</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Jul 2022 18:14:48 +0900</lastBuildDate><atom:link href="https://msl9204.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Jul 2022 00:24:41 +0900</lastBuildDate><atom:link href="https://msl9204.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>모든 개발자를 위한 HTTP 지식</title>
+      <link>https://msl9204.github.io/improvement/%EB%AA%A8%EB%93%A0_%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC_%EC%9C%84%ED%95%9C_http_%EC%9B%B9_%EA%B8%B0%EB%B3%B8_%EC%A7%80%EC%8B%9D/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EB%AA%A8%EB%93%A0_%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A5%BC_%EC%9C%84%ED%95%9C_http_%EC%9B%B9_%EA%B8%B0%EB%B3%B8_%EC%A7%80%EC%8B%9D/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>스프링 DB 1편 데이터 접근 핵심 원리</title>
+      <link>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_db_1%ED%8E%B8_%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%A0%91%EA%B7%BC_%ED%95%B5%EC%8B%AC_%EC%9B%90%EB%A6%AC/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_db_1%ED%8E%B8_%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%A0%91%EA%B7%BC_%ED%95%B5%EC%8B%AC_%EC%9B%90%EB%A6%AC/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>스프링 DB 2편 데이터 접근 활용 기술</title>
+      <link>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_db_2%ED%8E%B8_%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%A0%91%EA%B7%BC_%ED%99%9C%EC%9A%A9_%EA%B8%B0%EC%88%A0/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_db_2%ED%8E%B8_%EB%8D%B0%EC%9D%B4%ED%84%B0_%EC%A0%91%EA%B7%BC_%ED%99%9C%EC%9A%A9_%EA%B8%B0%EC%88%A0/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>스프링 MVC 1편 백엔드 웹 개발 핵심 기술</title>
+      <link>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_mvc_1%ED%8E%B8_%EB%B0%B1%EC%97%94%EB%93%9C_%EC%9B%B9_%EA%B0%9C%EB%B0%9C_%ED%95%B5%EC%8B%AC_%EA%B8%B0%EC%88%A0/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_mvc_1%ED%8E%B8_%EB%B0%B1%EC%97%94%EB%93%9C_%EC%9B%B9_%EA%B0%9C%EB%B0%9C_%ED%95%B5%EC%8B%AC_%EA%B8%B0%EC%88%A0/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>스프링 MVC 2편 백엔드 웹 개발 활용 기술</title>
+      <link>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_mvc_2%ED%8E%B8_%EB%B0%B1%EC%97%94%EB%93%9C_%EC%9B%B9_%EA%B0%9C%EB%B0%9C_%ED%99%9C%EC%9A%A9_%EA%B8%B0%EC%88%A0/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_mvc_2%ED%8E%B8_%EB%B0%B1%EC%97%94%EB%93%9C_%EC%9B%B9_%EA%B0%9C%EB%B0%9C_%ED%99%9C%EC%9A%A9_%EA%B8%B0%EC%88%A0/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>스프링 핵심 원리 고급편</title>
+      <link>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_%ED%95%B5%EC%8B%AC_%EC%9B%90%EB%A6%AC_%EA%B3%A0%EA%B8%89%ED%8E%B8/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_%ED%95%B5%EC%8B%AC_%EC%9B%90%EB%A6%AC_%EA%B3%A0%EA%B8%89%ED%8E%B8/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>스프링 핵심 원리 기본편</title>
+      <link>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_%ED%95%B5%EC%8B%AC_%EC%9B%90%EB%A6%AC_%EA%B8%B0%EB%B3%B8%ED%8E%B8/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8A%A4%ED%94%84%EB%A7%81_%ED%95%B5%EC%8B%AC_%EC%9B%90%EB%A6%AC_%EA%B8%B0%EB%B3%B8%ED%8E%B8/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>실전! Querydsl</title>
+      <link>https://msl9204.github.io/improvement/%EC%8B%A4%EC%A0%84_querydsl/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8B%A4%EC%A0%84_querydsl/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>실전! 스프링 데이터 JPA</title>
+      <link>https://msl9204.github.io/improvement/%EC%8B%A4%EC%A0%84_%EC%8A%A4%ED%94%84%EB%A7%81_%EB%8D%B0%EC%9D%B4%ED%84%B0_jpa/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8B%A4%EC%A0%84_%EC%8A%A4%ED%94%84%EB%A7%81_%EB%8D%B0%EC%9D%B4%ED%84%B0_jpa/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>실전! 스프링 부트와 JPA 활용1 웹 어플리케이션 개발</title>
+      <link>https://msl9204.github.io/improvement/%EC%8B%A4%EC%A0%84_%EC%8A%A4%ED%94%84%EB%A7%81_%EB%B6%80%ED%8A%B8%EC%99%80_jpa_%ED%99%9C%EC%9A%A91_%EC%9B%B9_%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98_%EA%B0%9C%EB%B0%9C/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8B%A4%EC%A0%84_%EC%8A%A4%ED%94%84%EB%A7%81_%EB%B6%80%ED%8A%B8%EC%99%80_jpa_%ED%99%9C%EC%9A%A91_%EC%9B%B9_%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98_%EA%B0%9C%EB%B0%9C/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>실전! 스프링 부트와 JPA 활용2 API 개발과 성능 최적화</title>
+      <link>https://msl9204.github.io/improvement/%EC%8B%A4%EC%A0%84_%EC%8A%A4%ED%94%84%EB%A7%81_%EB%B6%80%ED%8A%B8%EC%99%80_jpa_%ED%99%9C%EC%9A%A92_api_%EA%B0%9C%EB%B0%9C%EA%B3%BC_%EC%84%B1%EB%8A%A5_%EC%B5%9C%EC%A0%81%ED%99%94/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%8B%A4%EC%A0%84_%EC%8A%A4%ED%94%84%EB%A7%81_%EB%B6%80%ED%8A%B8%EC%99%80_jpa_%ED%99%9C%EC%9A%A92_api_%EA%B0%9C%EB%B0%9C%EA%B3%BC_%EC%84%B1%EB%8A%A5_%EC%B5%9C%EC%A0%81%ED%99%94/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>자바 ORM 표준 JPA 프로그래밍 기본편</title>
+      <link>https://msl9204.github.io/improvement/%EC%9E%90%EB%B0%94_orm_%ED%91%9C%EC%A4%80_jpa_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EA%B8%B0%EB%B3%B8%ED%8E%B8/</link>
+      <pubDate>Mon, 25 Jul 2022 00:24:41 +0900</pubDate>
+      
+      <guid>https://msl9204.github.io/improvement/%EC%9E%90%EB%B0%94_orm_%ED%91%9C%EC%A4%80_jpa_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EA%B8%B0%EB%B3%B8%ED%8E%B8/</guid>
+      <description> </description>
+    </item>
+    
     <item>
       <title>소켓과 파일디스크립터</title>
       <link>https://msl9204.github.io/posts/file-descriptor/</link>
       <pubDate>Sat, 16 Jul 2022 18:14:48 +0900</pubDate>
       
       <guid>https://msl9204.github.io/posts/file-descriptor/</guid>
-      <description>회사에서 C 기반의 TCP Client를 구현해야 할 일이 생겨서 소켓의 동작방식을 자세히 알아보게 되었다. 그런데 socket에 대해 알아보기 전에 먼저 file descriptor에 대해 알아볼 필요가 있다.
-File Descriptor란? 파일 서술자라고 부르며 프로세스가 생성될 때 프로세스 만의 File Descriptor Table이 생성되고, 테이블에는 3개의 기본 표준 입출력 file descriptor (이하 fd)이 생성된다.
-정수값 이름 0 표준 입력 (stdin) 1 표준 출력 (stdout) 2 표준 오류 (stderr) 이 3개의 입출력은 흔히 터미널에서 ps -ef | grep [something] 처럼 사용하는 파이프를 이용한 명령어나 프로세스 실행 시, nohup a.</description>
+      <description>소켓과 파일디스크립터에 대해 알아봅니다.</description>
     </item>
     
     <item>
