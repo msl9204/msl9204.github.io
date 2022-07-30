@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZDG5DD515"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WZDG5DD515');
+    </script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>프로그래머스 - 멀쩡한 사각형 | Tech Log</title>
+<meta name="keywords" content="java, 알고리즘">
+<meta name="description" content="접근 제한사항에 W, H : 1억 이하의 자연수가 있으므로 완전탐색류는 아니고 직선의 기울기를 이용해서 푸는 문제처럼 보였다. 3개정도 그림을 그려보니 약분된 기울기를 구하면, 분자 * 분모 = 반복되는 블럭의 개수가 나오고 분자 &#43; 분모 - 1을 하면 반복되는 블럭 속에서 하얀색 부분의 개수가 나옴을 알 수 있었다. 코드 import java.io.BufferedReader; import java.io.IOException; import java.io.InputStreamReader; import java.util.StringTokenizer; public class 멀쩡한_사각형 { public static void main(String[] args) throws IOException { BufferedReader br = new BufferedReader(new InputStreamReader(System.">
+<meta name="author" content="">
+<link rel="canonical" href="https://msl9204.github.io/posts/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A9%80%EC%A9%A1%ED%95%9C-%EC%82%AC%EA%B0%81%ED%98%95/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d7fb4cbf980fe688a21621b06a795933c4e6bb2d4070ec940667af1715d84af2.css" integrity="sha256-1/tMv5gP5oiiFiGwanlZM8Tmuy1AcOyUBmevFxXYSvI=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://msl9204.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://msl9204.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://msl9204.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://msl9204.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://msl9204.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.1/styles/lioshi.min.css"
+    integrity="sha512-vimj6dRL8POPOUYEJtoaXpkwG6lnqGfwTldbcTfz15o0NpWeXzZS2pq0L/wJ8OBrAFwjqo1TqbwTgbaDdKZYKg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /><meta property="og:title" content="프로그래머스 - 멀쩡한 사각형" />
+<meta property="og:description" content="접근 제한사항에 W, H : 1억 이하의 자연수가 있으므로 완전탐색류는 아니고 직선의 기울기를 이용해서 푸는 문제처럼 보였다. 3개정도 그림을 그려보니 약분된 기울기를 구하면, 분자 * 분모 = 반복되는 블럭의 개수가 나오고 분자 &#43; 분모 - 1을 하면 반복되는 블럭 속에서 하얀색 부분의 개수가 나옴을 알 수 있었다. 코드 import java.io.BufferedReader; import java.io.IOException; import java.io.InputStreamReader; import java.util.StringTokenizer; public class 멀쩡한_사각형 { public static void main(String[] args) throws IOException { BufferedReader br = new BufferedReader(new InputStreamReader(System." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msl9204.github.io/posts/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A9%80%EC%A9%A1%ED%95%9C-%EC%82%AC%EA%B0%81%ED%98%95/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-30T21:43:00&#43;09:00" />
+<meta property="article:modified_time" content="2022-06-30T21:43:00&#43;09:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="프로그래머스 - 멀쩡한 사각형"/>
+<meta name="twitter:description" content="접근 제한사항에 W, H : 1억 이하의 자연수가 있으므로 완전탐색류는 아니고 직선의 기울기를 이용해서 푸는 문제처럼 보였다. 3개정도 그림을 그려보니 약분된 기울기를 구하면, 분자 * 분모 = 반복되는 블럭의 개수가 나오고 분자 &#43; 분모 - 1을 하면 반복되는 블럭 속에서 하얀색 부분의 개수가 나옴을 알 수 있었다. 코드 import java.io.BufferedReader; import java.io.IOException; import java.io.InputStreamReader; import java.util.StringTokenizer; public class 멀쩡한_사각형 { public static void main(String[] args) throws IOException { BufferedReader br = new BufferedReader(new InputStreamReader(System."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://msl9204.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "프로그래머스 - 멀쩡한 사각형",
+      "item": "https://msl9204.github.io/posts/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A9%80%EC%A9%A1%ED%95%9C-%EC%82%AC%EA%B0%81%ED%98%95/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "프로그래머스 - 멀쩡한 사각형",
+  "name": "프로그래머스 - 멀쩡한 사각형",
+  "description": "접근 제한사항에 W, H : 1억 이하의 자연수가 있으므로 완전탐색류는 아니고 직선의 기울기를 이용해서 푸는 문제처럼 보였다. 3개정도 그림을 그려보니 약분된 기울기를 구하면, 분자 * 분모 = 반복되는 블럭의 개수가 나오고 분자 + 분모 - 1을 하면 반복되는 블럭 속에서 하얀색 부분의 개수가 나옴을 알 수 있었다. 코드 import java.io.BufferedReader; import java.io.IOException; import java.io.InputStreamReader; import java.util.StringTokenizer; public class 멀쩡한_사각형 { public static void main(String[] args) throws IOException { BufferedReader br = new BufferedReader(new InputStreamReader(System.",
+  "keywords": [
+    "java", "알고리즘"
+  ],
+  "articleBody": "접근 제한사항에 W, H : 1억 이하의 자연수가 있으므로 완전탐색류는 아니고 직선의 기울기를 이용해서 푸는 문제처럼 보였다. 3개정도 그림을 그려보니 약분된 기울기를 구하면, 분자 * 분모 = 반복되는 블럭의 개수가 나오고 분자 + 분모 - 1을 하면 반복되는 블럭 속에서 하얀색 부분의 개수가 나옴을 알 수 있었다. 코드 import java.io.BufferedReader; import java.io.IOException; import java.io.InputStreamReader; import java.util.StringTokenizer; public class 멀쩡한_사각형 { public static void main(String[] args) throws IOException { BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); String read = br.readLine(); StringTokenizer st = new StringTokenizer(read); int W = Integer.parseInt(st.nextToken()); int H = Integer.parseInt(st.nextToken()); 멀쩡한_사각형 T = new 멀쩡한_사각형(); T.solution(W, H); } public long solution(int w, int h) { // w -\u003e x // h -\u003e y int gcd = gcd(w, h); long w_divided = w / gcd; long h_divided = h / gcd; long block = w / w_divided; return (long) w * h - (block * ( w_divided + h_divided - 1 )); } int gcd(int a, int b) { if(b == 0){ return a; }else{ return gcd(b, a%b); } } } ",
+  "wordCount" : "171",
+  "inLanguage": "en",
+  "datePublished": "2022-06-30T21:43:00+09:00",
+  "dateModified": "2022-06-30T21:43:00+09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://msl9204.github.io/posts/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%A9%80%EC%A9%A1%ED%95%9C-%EC%82%AC%EA%B0%81%ED%98%95/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tech Log",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://msl9204.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://msl9204.github.io/" accesskey="h" title="Tech Log (Alt + H)">Tech Log</a>
+            <div class="logo-switches">
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://msl9204.github.io/about/" title="about">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://msl9204.github.io/archives/" title="archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://msl9204.github.io/improvement/" title="Improvement">
+                    <span>Self-Improvement</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://msl9204.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://msl9204.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      프로그래머스 - 멀쩡한 사각형
+    </h1>
+    <div class="post-meta"><span title='2022-06-30 21:43:00 +0900 KST'>June 30, 2022</span>&nbsp;·&nbsp;1 min
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">목차</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%ec%a0%91%ea%b7%bc" aria-label="접근">접근</a></li>
+                <li>
+                    <a href="#%ec%bd%94%eb%93%9c" aria-label="코드">코드</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="접근">접근<a hidden class="anchor" aria-hidden="true" href="#접근">#</a></h1>
+<ol>
+<li>제한사항에 <code>W, H : 1억 이하의 자연수</code>가 있으므로 완전탐색류는 아니고
+직선의 기울기를 이용해서 푸는 문제처럼 보였다.</li>
+</ol>
+<p><img loading="lazy" src="/img/0/a.png" alt="1"  />
+
+<img loading="lazy" src="/img/0/b.png" alt="2"  />
+</p>
+<ol start="2">
+<li>3개정도 그림을 그려보니 약분된 기울기를 구하면, <code>분자 * 분모 = 반복되는 블럭의 개수</code>가 나오고   <code>분자 + 분모 - 1</code>을 하면 반복되는 블럭 속에서 하얀색 부분의 개수가 나옴을 알 수 있었다.</li>
+</ol>
+<h1 id="코드">코드<a hidden class="anchor" aria-hidden="true" href="#코드">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.BufferedReader<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.IOException<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.io.InputStreamReader<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.util.StringTokenizer<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">멀쩡한_사각형</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        BufferedReader br <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> InputStreamReader<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>        String read <span style="color:#f92672">=</span> br<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        StringTokenizer st <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringTokenizer<span style="color:#f92672">(</span>read<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> W <span style="color:#f92672">=</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">parseInt</span><span style="color:#f92672">(</span>st<span style="color:#f92672">.</span><span style="color:#a6e22e">nextToken</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> H <span style="color:#f92672">=</span> Integer<span style="color:#f92672">.</span><span style="color:#a6e22e">parseInt</span><span style="color:#f92672">(</span>st<span style="color:#f92672">.</span><span style="color:#a6e22e">nextToken</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        멀쩡한_사각형 T <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> 멀쩡한_사각형<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        T<span style="color:#f92672">.</span><span style="color:#a6e22e">solution</span><span style="color:#f92672">(</span>W<span style="color:#f92672">,</span> H<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">solution</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> w<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> h<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// w -&gt; x
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// h -&gt; y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> gcd <span style="color:#f92672">=</span> gcd<span style="color:#f92672">(</span>w<span style="color:#f92672">,</span> h<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> w_divided <span style="color:#f92672">=</span> w <span style="color:#f92672">/</span> gcd<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> h_divided <span style="color:#f92672">=</span> h <span style="color:#f92672">/</span> gcd<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> block <span style="color:#f92672">=</span> w <span style="color:#f92672">/</span> w_divided<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">long</span><span style="color:#f92672">)</span> w <span style="color:#f92672">*</span> h <span style="color:#f92672">-</span> <span style="color:#f92672">(</span>block <span style="color:#f92672">*</span> <span style="color:#f92672">(</span> w_divided <span style="color:#f92672">+</span> h_divided <span style="color:#f92672">-</span> 1 <span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">gcd</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> a<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> b<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>b <span style="color:#f92672">==</span> 0<span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> a<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> gcd<span style="color:#f92672">(</span>b<span style="color:#f92672">,</span> a<span style="color:#f92672">%</span>b<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://msl9204.github.io/tags/java/">java</a></li>
+      <li><a href="https://msl9204.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/">알고리즘</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://msl9204.github.io/posts/algorithm/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EB%8B%A4%EB%A6%AC%EB%A5%BC-%EC%A7%80%EB%82%98%EB%8A%94-%ED%8A%B8%EB%9F%AD/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>프로그래머스 - 다리를 지나는 트럭</span>
+  </a>
+</nav>
+
+  </footer>
+
+
+
+<script src="https://utteranc.es/client.js" repo="msl9204/msl9204.github.io" issue-term="pathname" theme="github-dark"
+    crossorigin="anonymous" async>
+    </script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://msl9204.github.io/">Tech Log</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

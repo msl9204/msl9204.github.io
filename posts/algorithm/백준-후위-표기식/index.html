@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WZDG5DD515"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-WZDG5DD515');
+    </script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>백준 - 후위 표기식 | Tech Log</title>
+<meta name="keywords" content="java, 알고리즘">
+<meta name="description" content="중위표기식 -&gt; 후위표기식 알고리즘">
+<meta name="author" content="">
+<link rel="canonical" href="https://msl9204.github.io/posts/algorithm/%EB%B0%B1%EC%A4%80-%ED%9B%84%EC%9C%84-%ED%91%9C%EA%B8%B0%EC%8B%9D/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d7fb4cbf980fe688a21621b06a795933c4e6bb2d4070ec940667af1715d84af2.css" integrity="sha256-1/tMv5gP5oiiFiGwanlZM8Tmuy1AcOyUBmevFxXYSvI=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://msl9204.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://msl9204.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://msl9204.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://msl9204.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://msl9204.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.1/styles/lioshi.min.css"
+    integrity="sha512-vimj6dRL8POPOUYEJtoaXpkwG6lnqGfwTldbcTfz15o0NpWeXzZS2pq0L/wJ8OBrAFwjqo1TqbwTgbaDdKZYKg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" /><meta property="og:title" content="백준 - 후위 표기식" />
+<meta property="og:description" content="중위표기식 -&gt; 후위표기식 알고리즘" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://msl9204.github.io/posts/algorithm/%EB%B0%B1%EC%A4%80-%ED%9B%84%EC%9C%84-%ED%91%9C%EA%B8%B0%EC%8B%9D/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-30T12:27:10&#43;09:00" />
+<meta property="article:modified_time" content="2022-07-30T12:27:10&#43;09:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="백준 - 후위 표기식"/>
+<meta name="twitter:description" content="중위표기식 -&gt; 후위표기식 알고리즘"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://msl9204.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "백준 - 후위 표기식",
+      "item": "https://msl9204.github.io/posts/algorithm/%EB%B0%B1%EC%A4%80-%ED%9B%84%EC%9C%84-%ED%91%9C%EA%B8%B0%EC%8B%9D/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "백준 - 후위 표기식",
+  "name": "백준 - 후위 표기식",
+  "description": "중위표기식 -\u0026gt; 후위표기식 알고리즘",
+  "keywords": [
+    "java", "알고리즘"
+  ],
+  "articleBody": "문제 링크\n개요 A*(B+C) 와 같이 중위표기식으로 써진 수식을 ABC+* 과 같은 후위표기식으로 바꿔 출력해야 한다.\n접근 자료구조는 Stack을 이용해서 해결한다. 연산자 또는 여는 괄호가 나오면 stack에 넣어둔다. 연산자 stack을 언제 내보내야 하는지 정의해야 한다. 연산자간의 우선순위를 정의해야 한다. (곱셈 나눗셈과 덧셈 뺄셈간의) stack의 top에 있는 연산자보다 우선순위가 낮은 연산자가 들어 오려 한다면, top을 내보낸다 (먼저 계산해야 하므로) stack의 top에 있는 연산자와 같은 우선순위의 연산자가 들어 오려 한다면, top을 내보낸다 (먼저 계산해야 하므로) 닫힌 괄호를 만났을 때, 여는 괄호를 만날 때 까지의 연산자들을 내보내야 한다. 코드 public class Main { public static void main(String[] args) throws IOException { Main main = new Main(); BufferedReader bf = new BufferedReader(new InputStreamReader(System.in)); String s = bf.readLine(); main.solution(s); } public void solution(String s) { Stack\u003cCharacter\u003e stk = new Stack\u003c\u003e(); StringBuffer sb = new StringBuffer(); Map\u003cCharacter, Integer\u003e valueMap = new HashMap\u003c\u003e(); valueMap.put('*', 1); valueMap.put('/', 1); valueMap.put('+', 0); valueMap.put('-', 0); valueMap.put('(', -1); for (int i = 0; i \u003c s.length(); i++) { Character currentChar = s.charAt(i); if (currentChar.toString().matches(\"[A-Z]\")) { sb.append(currentChar); continue; } if (currentChar == '(') { stk.push(currentChar); continue; } if (currentChar == ')') { while (stk.peek() != '(') { sb.append(stk.pop()); } stk.pop(); continue; } if (stk.size() \u003e 0) { int size = stk.size(); for (int j = 0; j \u003c size; j++) { Integer currentTopValue = valueMap.get(stk.peek()); Integer currentInputValue = valueMap.get(currentChar); if (currentTopValue \u003e= currentInputValue) { sb.append(stk.pop()); } else break; } } if (currentChar == '+' || currentChar == '-' || currentChar == '*' || currentChar == '/') { stk.push(currentChar); } } while (!stk.isEmpty()) sb.append(stk.pop()); System.out.println(sb); } } ",
+  "wordCount" : "253",
+  "inLanguage": "en",
+  "datePublished": "2022-07-30T12:27:10+09:00",
+  "dateModified": "2022-07-30T12:27:10+09:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://msl9204.github.io/posts/algorithm/%EB%B0%B1%EC%A4%80-%ED%9B%84%EC%9C%84-%ED%91%9C%EA%B8%B0%EC%8B%9D/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tech Log",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://msl9204.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://msl9204.github.io/" accesskey="h" title="Tech Log (Alt + H)">Tech Log</a>
+            <div class="logo-switches">
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://msl9204.github.io/about/" title="about">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://msl9204.github.io/archives/" title="archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://msl9204.github.io/improvement/" title="Improvement">
+                    <span>Self-Improvement</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://msl9204.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://msl9204.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      백준 - 후위 표기식
+    </h1>
+    <div class="post-meta"><span title='2022-07-30 12:27:10 +0900 KST'>July 30, 2022</span>&nbsp;·&nbsp;2 min
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">목차</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%ea%b0%9c%ec%9a%94" aria-label="개요">개요</a></li>
+                <li>
+                    <a href="#%ec%a0%91%ea%b7%bc" aria-label="접근">접근</a></li>
+                <li>
+                    <a href="#%ec%bd%94%eb%93%9c" aria-label="코드">코드</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><a href="https://www.acmicpc.net/problem/1918">문제 링크</a></p>
+<h1 id="개요">개요<a hidden class="anchor" aria-hidden="true" href="#개요">#</a></h1>
+<p>A*(B+C) 와 같이 중위표기식으로 써진 수식을 ABC+* 과 같은 후위표기식으로 바꿔 출력해야 한다.</p>
+<h1 id="접근">접근<a hidden class="anchor" aria-hidden="true" href="#접근">#</a></h1>
+<ol>
+<li>자료구조는 Stack을 이용해서 해결한다.</li>
+<li>연산자 또는 여는 괄호가 나오면 stack에 넣어둔다.</li>
+<li>연산자 stack을 언제 내보내야 하는지 정의해야 한다.
+<ol>
+<li>연산자간의 우선순위를 정의해야 한다. (곱셈 나눗셈과 덧셈 뺄셈간의)
+<ul>
+<li>stack의 top에 있는 연산자보다 우선순위가 낮은 연산자가 들어 오려 한다면, top을 내보낸다 (먼저 계산해야 하므로)</li>
+<li>stack의 top에 있는 연산자와 같은 우선순위의 연산자가 들어 오려 한다면, top을 내보낸다 (먼저 계산해야 하므로)</li>
+</ul>
+</li>
+<li>닫힌 괄호를 만났을 때, 여는 괄호를 만날 때 까지의 연산자들을 내보내야 한다.</li>
+</ol>
+</li>
+</ol>
+<h1 id="코드">코드<a hidden class="anchor" aria-hidden="true" href="#코드">#</a></h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Main</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Main main <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Main<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        BufferedReader bf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BufferedReader<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> InputStreamReader<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">));</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        String s <span style="color:#f92672">=</span> bf<span style="color:#f92672">.</span><span style="color:#a6e22e">readLine</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        main<span style="color:#f92672">.</span><span style="color:#a6e22e">solution</span><span style="color:#f92672">(</span>s<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">solution</span><span style="color:#f92672">(</span>String s<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        Stack<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">&gt;</span> stk <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Stack<span style="color:#f92672">&lt;&gt;();</span>
+</span></span><span style="display:flex;"><span>        StringBuffer sb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuffer<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>        Map<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">,</span> Integer<span style="color:#f92672">&gt;</span> valueMap <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        valueMap<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;*&#39;</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        valueMap<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;/&#39;</span><span style="color:#f92672">,</span> 1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        valueMap<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        valueMap<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">,</span> 0<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        valueMap<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;(&#39;</span><span style="color:#f92672">,</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> s<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">();</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            Character currentChar <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>currentChar<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">().</span><span style="color:#a6e22e">matches</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;[A-Z]&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                sb<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>currentChar<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>currentChar <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                stk<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>currentChar<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>currentChar <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;)&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>stk<span style="color:#f92672">.</span><span style="color:#a6e22e">peek</span><span style="color:#f92672">()</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;(&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    sb<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>stk<span style="color:#f92672">.</span><span style="color:#a6e22e">pop</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>                stk<span style="color:#f92672">.</span><span style="color:#a6e22e">pop</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">continue</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>stk<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">()</span> <span style="color:#f92672">&gt;</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> stk<span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> j <span style="color:#f92672">&lt;</span> size<span style="color:#f92672">;</span> j<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                    Integer currentTopValue <span style="color:#f92672">=</span> valueMap<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>stk<span style="color:#f92672">.</span><span style="color:#a6e22e">peek</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>                    Integer currentInputValue <span style="color:#f92672">=</span> valueMap<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>currentChar<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>currentTopValue <span style="color:#f92672">&gt;=</span> currentInputValue<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                        sb<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>stk<span style="color:#f92672">.</span><span style="color:#a6e22e">pop</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>currentChar <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">||</span> currentChar <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;-&#39;</span> <span style="color:#f92672">||</span> currentChar <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;*&#39;</span> <span style="color:#f92672">||</span> currentChar <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                stk<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>currentChar<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(!</span>stk<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">())</span> sb<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>stk<span style="color:#f92672">.</span><span style="color:#a6e22e">pop</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>sb<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://msl9204.github.io/tags/java/">java</a></li>
+      <li><a href="https://msl9204.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/">알고리즘</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://msl9204.github.io/posts/file-descriptor/">
+    <span class="title">Next »</span>
+    <br>
+    <span>소켓과 파일디스크립터</span>
+  </a>
+</nav>
+
+  </footer>
+
+
+
+<script src="https://utteranc.es/client.js" repo="msl9204/msl9204.github.io" issue-term="pathname" theme="github-dark"
+    crossorigin="anonymous" async>
+    </script>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://msl9204.github.io/">Tech Log</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
